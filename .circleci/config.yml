@@ -1,0 +1,35 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/samplescala
+    docker:
+      - image: adoptopenjdk:11-jdk-hotspot
+    environment:
+      SBT_VERSION: 1.2.8
+    steps:
+      - run:
+          name: Get sbt binary
+          command: |
+                    apt update && apt install -y curl
+                    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb
+                    dpkg -i sbt-$SBT_VERSION.deb
+                    rm sbt-$SBT_VERSION.deb
+                    apt-get update
+                    apt-get install -y sbt python-pip git
+                    pip install awscli
+                    apt-get clean && apt-get autoclean
+      - checkout
+      - restore_cache:
+          key: sbt-cache
+      - run:
+          name: Check formatting
+          command: sbt scalafmtSbtCheck scalafmtCheck test:scalafmtCheck
+      - run:
+          name: Test
+          command: sbt test
+      - save_cache:
+          key: sbt-cache
+          paths:
+            - "~/.ivy2/cache"
+            - "~/.sbt"
+            - "~/.m2"
