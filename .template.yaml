@@ -2,5 +2,5 @@ variables:
   Project name: scala-project-template
   Organization: org.organization
 features:
-- master:
+- scala:
     description: Basic template to kickstart Scala projects
