@@ -6,3 +6,5 @@ features:
     description: Basic template to kickstart Scala projects
 - ci.circle:
     description: Build on Circle CI
+conflicts:
+- ci.travis
