@@ -1,0 +1,15 @@
+name: Propagate changes
+
+on: [push]
+
+jobs:
+  propagate:
+    name: Propagate changes
+    runs-on: ubuntu-latest
+    steps:
+    - uses: rtimush/tenpureto-github-action@master
+      if: github.repository == 'rtimush/scala-project-template'
+      with:
+        args: propagate
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
