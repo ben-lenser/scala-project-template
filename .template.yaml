@@ -8,3 +8,5 @@ features:
     description: Build on Travis CI
 conflicts:
 - ci.circle
+excludes:
+- /.github
