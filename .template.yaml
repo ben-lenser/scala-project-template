@@ -4,3 +4,5 @@ variables:
 features:
 - scala:
     description: Basic template to kickstart Scala projects
+excludes:
+- /.github
