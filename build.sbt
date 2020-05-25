@@ -1,5 +1,5 @@
 val versions = new {
-  val scala = "2.13.0"
+  val scala = "2.13.5"
 }
 
 lazy val root = project
